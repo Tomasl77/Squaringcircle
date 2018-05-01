@@ -1,0 +1,48 @@
+Pour afficher la liste des tables de la BDD:
+
+Afficher la liste des tables :
+show tables;
+
+Description film :
+DESC film;
+
+Afficher le titres des films:
+SELECT titre from film AS titre_film 
+
+Liste des films NULL:
+SELECT `titre` FROM film WHERE id_genre IS NULL
+
+10 derniers film de 2000:
+SELECT `titre` FROM film WHERE date_debut_affiche < '2001-01-01' order by date_debut_affiche DESC limit 10
+
+
+Moins facile:
+Titre ID genre 1 ou 2 qui commencent par A:
+SELECT `titre` FROM film WHERE id_genre = (1 OR 2) and titre LIKE 'a%'
+
+Nombre de places dans le cinema:
+SELECT sum(nbr_siege) FROM salle WHERE etage_salle = 0 / 1 / 2
+
+Nom des salle sieges < 200:
+SELECT nom_salle FROM salle WHERE nbr_siege<200
+
+titre cool avec day et genre sci-fi
+SELECT `titre` FROM film WHERE id_genre = 2 and titre LIKE '%day%' AS 'titre_cool'
+
+
+Pas faciles:
+
+Nombre d'abo et prix moyen dans des colonnes:
+SELECT floor(avg(prix))  AS 'avg_abo', count(id_abo) AS 'Nbr_abo' FROM abonnement
+
+3-2
+SELECT MAX(id_film) AS max_id_film FROM film where id_genre=8 AND year(date_debut_affiche) BETWEEN 1980 AND 1999
+
+3-3
+SELECT DISTINCT membre.id_membre, membre.date_dernier_film AS 'last movie' FROM membre INNER JOIN historique_membre ON membre.id_membre = historique_membre.id_membre WHERE id_film IN(2557,2741) order by date_dernier_film DESC 
+
+
+Boss
+
+Je n'ai pas encore trouver. Ne prends pas en compte la ligne du dessous.
+SELECT DISTINCT genre.id_genre AS 'nom genre', id_film AS 'last movie' FROM film INNER JOIN id_genre ON genre_id.genre = id_genre.id_genre WHERE id_genre IN(1,2,3) order by id_genre DESC
